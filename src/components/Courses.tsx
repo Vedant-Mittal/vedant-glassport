@@ -142,11 +142,7 @@ const Courses = () => {
               </div>
 
               {/* CTA */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-2xl font-bold text-primary">{featuredCourse.price}</span>
-                  <span className="text-muted-foreground ml-2 line-through">$199</span>
-                </div>
+              <div className="flex justify-center">
                 <Button
                   size="lg"
                   onClick={() => navigate('/course/react-mastery')}

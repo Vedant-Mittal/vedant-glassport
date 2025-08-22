@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, FileText, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import heroImage from '@/assets/hero-bg.jpg';
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -12,36 +11,28 @@ const Hero = () => {
   };
 
   return (
-    <section 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${heroImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      {/* Glass overlay */}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
-      
+    <section className="h-[50vh] flex items-center justify-center relative bg-background">
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div className="text-center px-6 max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 glow-text text-primary">
-            Vedant Mittal
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+            Learn Tech, <span className="text-primary">One Saturday</span>
+            <br />
+            <span className="text-primary">Blog</span> at a Time
           </h1>
           
           <motion.p 
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Tech Entrepreneur & Educator | Building the future through code and courses
+            Master technology and entrepreneurship with our weekend blog series. 
+            Saturday Tech tutorials for beginners, Sunday Deep Dives for advanced strategies.
           </motion.p>
 
           <motion.div 
@@ -53,16 +44,17 @@ const Hero = () => {
             <Button
               size="lg"
               onClick={() => scrollToSection('articles')}
-              className="glass-card glow-border bg-transparent hover:bg-primary/20 text-primary border-primary"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               <FileText className="mr-2 h-5 w-5" />
-              Read Articles
+              Read Latest Post
             </Button>
             
             <Button
               size="lg"
+              variant="outline"
               onClick={() => scrollToSection('courses')}
-              className="glass-card bg-primary/90 hover:bg-primary text-primary-foreground glow-border"
+              className="border-primary text-primary hover:bg-primary/10"
             >
               <BookOpen className="mr-2 h-5 w-5" />
               Explore Courses
@@ -76,7 +68,7 @@ const Hero = () => {
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <ArrowDown className="h-6 w-6 text-primary animate-glow-pulse" />
+          <ArrowDown className="h-6 w-6 text-primary" />
         </motion.div>
       </div>
     </section>

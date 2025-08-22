@@ -44,17 +44,28 @@ const Articles = () => {
   ];
 
   useEffect(() => {
-    // Simulate API call - replace with actual Substack RSS fetch
     const fetchArticles = async () => {
       try {
-        // In production, use: await axios.get('https://vedantmittal.substack.com/feed')
-        setTimeout(() => {
-          setArticles(mockArticles);
-          setLoading(false);
-        }, 1000);
+        // Using a CORS proxy to fetch the RSS feed
+        const response = await axios.get(
+          `https://api.rss2json.com/v1/api.json?rss_url=https://vedantmittal.substack.com/feed`
+        );
+        
+        if (response.data && response.data.items) {
+          const formattedArticles: Article[] = response.data.items.slice(0, 6).map((item: any) => ({
+            title: item.title,
+            link: item.link,
+            pubDate: item.pubDate,
+            description: item.description?.replace(/<[^>]*>/g, '').substring(0, 150) + '...' || 'No description available',
+            author: item.author || 'Vedant Mittal'
+          }));
+          setArticles(formattedArticles);
+        }
       } catch (error) {
         console.error('Error fetching articles:', error);
+        // Fallback to mock data if fetch fails
         setArticles(mockArticles);
+      } finally {
         setLoading(false);
       }
     };
